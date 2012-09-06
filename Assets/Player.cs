@@ -4,9 +4,11 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	
 	public Transform world;
-	public float jumpIntensity = 200;
+	public Vector3 jumpVelocity;
 	
-	public static float acceleration = 10;
+	public static float gravity = 20.0f;
+	
+	private bool jumping = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,18 +16,31 @@ public class Player : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () {
+	void Update () {
 		float dt = Time.deltaTime;
 		
 		//Determines proper orientation/gravity for player on planet surface.
 		Vector3 planetCore = (world.position - transform.position).normalized;
-		rigidbody.AddForce (planetCore * acceleration * rigidbody.mass);
+		rigidbody.AddForce (planetCore * gravity);
+		
+		//Update Debug UI's Velocity value
+		GUIManager.UpdateVelocity(rigidbody.velocity.y);
 		
 		transform.rotation.SetFromToRotation(Vector3.up, planetCore);
 		
-		//Temporary game start
-		if(Input.GetKey(KeyCode.Space)) {
-			rigidbody.AddForce(0, jumpIntensity, 0);	
+		if(Input.GetKey(KeyCode.Space) && !jumping) {
+			rigidbody.AddForce (jumpVelocity, ForceMode.VelocityChange);
+			jumping = true;
 		}
+	}
+	
+	void OnCollisionEnter()
+	{
+		jumping = false;
+	}
+	
+	void OnCollisionExit()
+	{
+		jumping = true;	
 	}
 }
