@@ -44,7 +44,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Managers\DestructionManager.cs" />
      <Compile Include="Assets\Managers\GUIManager.cs" />
+     <Compile Include="Assets\Managers\ObstacleManager.cs" />
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\WorldRotation.cs" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />

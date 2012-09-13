@@ -4,7 +4,7 @@ using System.Collections;
 public class WorldRotation : MonoBehaviour {
 	public float rotationSpeed = 10.0f;
 	float angle;
-	bool gameRunning = false;
+	bool gameRunning = true;
 
 	// Use this for initialization
 	void Start () {

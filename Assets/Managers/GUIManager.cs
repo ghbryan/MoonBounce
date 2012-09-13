@@ -4,6 +4,8 @@ using System.Collections;
 public class GUIManager : MonoBehaviour {
 	
 	public GUIText velocityText, gameTitle;
+
+    //Debug Mode flag
 	public bool debugMode = false;
 	
 	private static GUIManager instance;
@@ -11,8 +13,9 @@ public class GUIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		instance = this;
-		
-		gameTitle.enabled = false; //Main Menu: Title
+
+        //Main Menu: Title
+		gameTitle.enabled = false;
 		
 		if(debugMode) {
 			velocityText.enabled = true;

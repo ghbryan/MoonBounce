@@ -17,8 +17,6 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float dt = Time.deltaTime;
-		
 		//Determines proper orientation/gravity for player on planet surface.
 		Vector3 planetCore = (world.position - transform.position).normalized;
 		rigidbody.AddForce (planetCore * gravity);
@@ -34,9 +32,15 @@ public class Player : MonoBehaviour {
 		}
 	}
 	
-	void OnCollisionEnter()
+	void OnCollisionEnter(Collision collision)
 	{
-		jumping = false;
+        //Temporary obstacle collision detection
+        if(collision.gameObject.tag == "Obstacle") {
+            Debug.Log ("Player hit obstacle. Game over.");
+        }
+        else {
+            jumping = false;
+        }
 	}
 	
 	void OnCollisionExit()
