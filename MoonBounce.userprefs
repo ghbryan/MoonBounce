@@ -1,12 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Player.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Managers/GameManager.cs">
     <Files>
-      <File FileName="Assets/Player.cs" Line="48" Column="19" />
-      <File FileName="Assets/Managers/GUIManager.cs" Line="23" Column="9" />
-      <File FileName="Assets/Managers/ObstacleManager.cs" Line="37" Column="49" />
-      <File FileName="Assets/Managers/DestructionManager.cs" Line="8" Column="63" />
-      <File FileName="Assets/WorldRotation.cs" Line="18" Column="37" />
+      <File FileName="Assets/Player.cs" Line="33" Column="64" />
+      <File FileName="Assets/Managers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Managers/ObstacleManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Managers/DestructionManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/WorldRotation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Managers/GameManager.cs" Line="5" Column="2" />
+      <File FileName="Assets/Managers/ControllerManager.cs" Line="21" Column="40" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

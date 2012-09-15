@@ -2,17 +2,23 @@ using UnityEngine;
 using System.Collections;
 
 public class Player : MonoBehaviour {
-	
+
+    public static Player instance;
+
+    //the world we want gravity to attract us to
 	public Transform world;
-	public Vector3 jumpVelocity;
+
+    //a Vector3 that forces the player up the y-axis 20f
+	public static Vector3 jumpVelocity = new Vector3(0, 20f, 0);
 	
 	public static float gravity = 20.0f;
-	
-	private bool jumping = false;
+
+    //a safety for preventing doublejumps
+	private static bool jumping = false;
 	
 	// Use this for initialization
 	void Start () {
-	
+	    instance = this;
 	}
 	
 	// Update is called once per frame
@@ -25,13 +31,9 @@ public class Player : MonoBehaviour {
 		GUIManager.UpdateVelocity(rigidbody.velocity.y);
 		
 		transform.rotation.SetFromToRotation(Vector3.up, planetCore);
-		
-		if(Input.GetKey(KeyCode.Space) && !jumping) {
-			rigidbody.AddForce (jumpVelocity, ForceMode.VelocityChange);
-			jumping = true;
-		}
 	}
-	
+
+    //if i'm touching an object--i'm no longer jumping
 	void OnCollisionEnter(Collision collision)
 	{
         //Temporary obstacle collision detection
@@ -42,9 +44,20 @@ public class Player : MonoBehaviour {
             jumping = false;
         }
 	}
-	
+
+    //if i'm not touching the ground--i'm jumping
 	void OnCollisionExit()
 	{
 		jumping = true;	
 	}
+
+    //perform a jump
+    public static void Jump() {
+
+        //jump, if you're not already
+        if(!jumping) {
+            Player.instance.rigidbody.AddForce (jumpVelocity, ForceMode.VelocityChange);
+            jumping = true;
+        }
+    }
 }

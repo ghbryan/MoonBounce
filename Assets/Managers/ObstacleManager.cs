@@ -16,7 +16,20 @@ public class ObstacleManager : MonoBehaviour {
     public GameObject fence;
 
     //List of obstacles alive
-    private static List<GameObject> obstacleList = new List<GameObject>();
+    private static List<GameObject> spawnedObstacles = new List<GameObject>();
+
+    //while true, create obstacles
+    public static bool buildObstacles = false;
+
+    //enable obstacle creation
+    public static void Create() {
+        buildObstacles = true;
+    }
+
+    //disable obstacle creation
+    public static void StopCreation() {
+        buildObstacles = false;
+    }
 
     //Object creation frequency
     float placeTimer = 1;
@@ -28,28 +41,31 @@ public class ObstacleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float dt = Time.deltaTime;
-        placeTimer -= dt;
-        Debug.Log ("PlaceTimer: " + placeTimer + "\nDeltaTime: " + dt);
 
-        if(placeTimer < 0) {
-            CreateObstacle();
-            placeTimer = Random.Range (1.2f, 3.0f);
+        //temporary build timer
+        if(buildObstacles) {
+            float dt = Time.deltaTime;
+            placeTimer -= dt;
+    
+            if(placeTimer < 0) {
+                CreateObstacle();
+                placeTimer = Random.Range (1.2f, 3.0f);
+            }
         }
-	    
 	}
 
     //Creates a new obstacle
     void CreateObstacle() {
         GameObject obstacle = (GameObject)Instantiate (fence);
         obstacle.transform.parent = world.transform;
-        obstacleList.Add (obstacle);
+        spawnedObstacles.Add (obstacle);
+        Debug.Log (spawnedObstacles.Count);
     }
 
     //Validates and destroys obstacles upon collision
     public static void DestroyObstacle(GameObject obstacle) {
-        if(obstacleList.Contains (obstacle)) {
-            obstacleList.Remove (obstacle);
+        if(spawnedObstacles.Contains (obstacle)) {
+            spawnedObstacles.Remove (obstacle);
             Destroy(obstacle);
         }
     }
